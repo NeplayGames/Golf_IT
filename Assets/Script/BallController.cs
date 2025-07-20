@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NeplayGames.Ball
+namespace NeplayGames.GolfIt.Ball
 {
     public class BallController : MonoBehaviour
     {
