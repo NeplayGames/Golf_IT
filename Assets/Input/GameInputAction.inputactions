@@ -1,0 +1,34 @@
+{
+    "name": "GameInputAction",
+    "maps": [
+        {
+            "name": "BallControl",
+            "id": "eff6c1df-5c1b-4dee-a6ba-fbcfc542ac82",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Button",
+                    "id": "ce59c21a-391d-4a13-a241-16255abe4d21",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a10e295f-511b-48c2-b129-7478d8010e85",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
