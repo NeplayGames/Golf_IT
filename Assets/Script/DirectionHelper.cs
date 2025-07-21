@@ -4,13 +4,14 @@ namespace NeplayGames.GolfIt
 {
     public class DirectionHelper : MonoBehaviour
     {
+        [field: SerializeField] public Transform initializePoint { get; private set; }
         [SerializeField] private float rotationSpeed = 90f; // degrees per second
 
         private Quaternion leftRotation;
         private Quaternion rightRotation;
         private Quaternion currentTarget;
         private bool goingRight = true;
-
+        public bool playBall{ private get; set; } = false;
         void Start()
         {
             float initialY = transform.eulerAngles.y;
@@ -26,6 +27,7 @@ namespace NeplayGames.GolfIt
 
         void Update()
         {
+            if (playBall) return;
             // Rotate toward current target
             transform.rotation = Quaternion.RotateTowards(transform.rotation, currentTarget, rotationSpeed * Time.deltaTime);
 
