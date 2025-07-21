@@ -7,19 +7,18 @@ namespace NeplayGames.GolfIt.Ball
     {
         [SerializeField, Range(1, 30)] private float speed = 3f;
 
-        private Quaternion leftRotation;
-        private Quaternion rightRotation;
-        private bool goingRight = true;
+        private Quaternion initialRotation;
+        private Quaternion opositeRotation;
+        private bool changeInitialDirection = false;
         private float baseY;
+        public event Action<bool> GameOver; 
+        public event Action GotHit; 
         void Start()
         {
-            float dot = Vector3.Dot(transform.forward, Vector3.right);
-            goingRight = dot >= 0f;
             baseY = transform.eulerAngles.y;
-
             // Set the two endpoints relative to the starting Y rotation
-            leftRotation = Quaternion.Euler(0f, baseY, 0f);
-            rightRotation = Quaternion.Euler(0f, -baseY, 0f);
+            initialRotation = Quaternion.Euler(0f, baseY, 0f);
+            opositeRotation = Quaternion.Euler(0f, -baseY, 0f);
             
         }
         void Update()
@@ -28,12 +27,21 @@ namespace NeplayGames.GolfIt.Ball
         }
         void OnCollisionEnter(Collision collision)
         {
+            if (collision.collider.CompareTag("Obstacle"))
+            {
+                GameOver?.Invoke(false);
+            }
+            if (collision.collider.CompareTag("Hole"))
+            {
+                GameOver?.Invoke(true);
+            }
         }
 
         public void ChangeDirection()
         {
-            goingRight = !goingRight;
-            transform.rotation = goingRight ? rightRotation : leftRotation;
+            changeInitialDirection = !changeInitialDirection;
+            GotHit?.Invoke();
+            transform.rotation = changeInitialDirection ? opositeRotation : initialRotation;
         }
     }
 
